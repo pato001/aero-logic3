@@ -1,5 +1,5 @@
-import { LandingPage } from './LandingPage';
-import { RiddlePage } from './RiddlePage';
+import { LandingPage } from './landingPage/useCases/launchRandomRiddle/LaunchRandomRiddle';
+import { RiddlePage } from './riddle/useCases/solveRiddle/SolveRiddlePage';
 
 export const routes = [
     {
