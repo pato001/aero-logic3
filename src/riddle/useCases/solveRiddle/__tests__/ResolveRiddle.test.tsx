@@ -1,4 +1,6 @@
 import { App } from '../../../../App';
+import { provideRiddleAnswer } from '../../../../domain/riddle/RiddleAnswerProvider';
+import { ContextProvider } from '../../../../common/context';
 
 describe('Resolve riddle', () => {
     it('resolve random riddle', () => {
@@ -25,7 +27,15 @@ describe('Resolve riddle', () => {
             },
         });
 
-        cy.mount(<App />, '/riddle/RIDDLE_ID');
+        const fake = () =>
+            Promise.resolve({ id: 'ANSWER_KEYBOARD_ID', text: 'A keyboard' });
+
+        cy.mount(
+            <ContextProvider providers={[provideRiddleAnswer(fake)]}>
+                <App />
+            </ContextProvider>,
+            '/riddle/RIDDLE_ID',
+        );
 
         cy.getByTestId('contents').should(
             'have.text',
@@ -35,7 +45,7 @@ describe('Resolve riddle', () => {
         cy.getByTestId('answer-ANSWER_PIANO_ID').should('be.visible');
         cy.getByTestId('answer-ANSWER_KEYBOARD_ID').should('be.visible');
 
-        cy.getByTestId('answer-ANSWER_PIANO_ID').click();
+        cy.getByTestId('answer-ANSWER_KEYBOARD_ID').click();
 
         cy.getByTestId('correct-answer').should('be.visible');
     });
