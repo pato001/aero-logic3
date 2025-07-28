@@ -7,11 +7,11 @@ export const createLaunchRandomRiddleModel = (date: Date) => {
     const minutes = String(date.getMinutes()).padStart(2, '0');
     let workInterval = 'Busy Times';
 
-    if (hoursStr >= 11 && hoursStr > 17) {
+    if (hoursStr >= 11 && hoursStr < 17) {
         workInterval = 'Easy jets';
     } else if (hoursStr >= 17 && hoursStr < 23) {
         workInterval = 'Returning pips';
-    } else if (hoursStr >= 23 && hoursStr < 5) {
+    } else if (hoursStr >= 23 || hoursStr < 5) {
         workInterval = 'Sleepies';
     }
     const timestamp = `${year}-${month}-${day} ${hours}${minutes}`;
