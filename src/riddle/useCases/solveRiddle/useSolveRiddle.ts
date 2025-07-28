@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAnswerFor } from 'riddle-exam';
 import { useRandomRiddle } from '../../../domain/riddle/useRandomRiddle';
 import { useRiddle } from './useRiddle';
 import { createSolveRiddleModel } from './createSolveRiddleService';
+import { getAnswer } from './riddleAdapter';
 
 export const useSolveRiddle = () => {
     const { id } = useParams<{ id: string }>();
@@ -34,7 +34,7 @@ export const useSolveRiddle = () => {
         }
         setSelected(id);
 
-        const data = await getAnswerFor(riddle.id);
+        const data = await getAnswer(riddle.id);
         refetch();
         setCorrect(data.id);
     };
