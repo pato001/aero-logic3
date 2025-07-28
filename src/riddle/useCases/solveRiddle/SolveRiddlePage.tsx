@@ -19,7 +19,11 @@ export const RiddlePage = () => {
 
     return (
         <main className="text-lg">
-            <p dangerouslySetInnerHTML={{ __html: riddle!.contents }} className="mb-16" />
+            <p
+                dangerouslySetInnerHTML={{ __html: riddle!.contents }}
+                className="mb-16"
+                data-test="contents"
+            />
             <p className="mb-5">Possible answers:</p>
             <ul>
                 {answers!.map((answer) => (
@@ -30,13 +34,14 @@ export const RiddlePage = () => {
                             'border py-2 pl-3 pr-2 my-1',
                             getAnswerOptionClassName(answer.id),
                         )}
+                        data-test={`answer-${answer.id}`}
                     >
                         <span className="pl-2">{answer.text}</span>
                     </li>
                 ))}
             </ul>
             {status === 'correct' && (
-                <div className="bg-green-400 my-6 p-3">
+                <div className="bg-green-400 my-6 p-3" data-test="correct-answer">
                     {"Great job! You're right 🙏"}
                 </div>
             )}
