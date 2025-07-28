@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useRandomRiddle } from '../../../domain/riddle/useRandomRiddle';
 import { useRiddle } from './useRiddle';
 import { createSolveRiddleModel } from './createSolveRiddleService';
-import { getAnswer } from './riddleAdapter';
+import { useRiddleAnswer } from '../../../domain/riddle/RiddleAnswerProvider';
 
 export const useSolveRiddle = () => {
     const { id } = useParams<{ id: string }>();
+    const getAnswerFor = useRiddleAnswer();
 
     const [correct, setCorrect] = useState<string>();
     const [selected, setSelected] = useState<string>();
@@ -34,7 +35,7 @@ export const useSolveRiddle = () => {
         }
         setSelected(id);
 
-        const data = await getAnswer(riddle.id);
+        const data = await getAnswerFor(riddle.id);
         refetch();
         setCorrect(data.id);
     };

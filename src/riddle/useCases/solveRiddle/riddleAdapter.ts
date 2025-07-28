@@ -1,5 +1,6 @@
-import { Riddle, RiddleAnswer } from '../../../domain/riddle/riddleService';
+import { Riddle } from '../../../domain/riddle/riddleService';
 import { getAnswerFor } from 'riddle-exam';
+import { RiddleAnswerAdapter } from '../../../domain/riddle/RiddleAnswerProvider';
 
 export const getRiddle = async (id: string): Promise<Riddle> => {
     return fetch(`http://localhost:3000/riddles/${id}`).then((response) =>
@@ -7,6 +8,6 @@ export const getRiddle = async (id: string): Promise<Riddle> => {
     );
 };
 
-export function getAnswer(id: string): Promise<RiddleAnswer> {
+export const getAnswer: RiddleAnswerAdapter = (id: string) => {
     return getAnswerFor(id);
-}
+};
