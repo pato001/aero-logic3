@@ -20,7 +20,7 @@ export const useSolveRiddle = () => {
         [riddle?.answers],
     );
 
-    const { getAnswerOptionClassName, random, shouldDisplayRiddle, status } =
+    const { random, shouldDisplayRiddle, status } =
         createSolveRiddleModel({
             isLoading,
             selected,
@@ -47,6 +47,7 @@ export const useSolveRiddle = () => {
         shouldDisplayRiddle,
         status,
         handleClick,
-        getAnswerOptionClassName,
+        selected,
+        correct
     };
 };

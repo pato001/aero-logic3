@@ -26,17 +26,8 @@ export const createSolveRiddleModel = ({
         return '';
     };
 
-    const getAnswerOptionClassName = (answerId: string) => ({
-        'cursor-pointer': !selected,
-        'border-blue-500': !correct,
-        "border-green-700 text-green-900 before:content-['✓']":
-            selected === answerId && correct && correct === answerId,
-        "border-red-700 text-red-800  before:content-['✗']":
-            selected === answerId && correct && correct !== answerId,
-    });
 
     return {
-        getAnswerOptionClassName,
         random,
         shouldDisplayRiddle,
         status: getStatus(),
