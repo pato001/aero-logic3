@@ -1,5 +1,5 @@
 import { createGenericContext } from '../../common/context';
-import { RiddleAnswer } from './RiddleService';
+import { RiddleAnswer } from './riddleService';
 
 export type RiddleAnswerAdapter = (riddleId: string) => Promise<RiddleAnswer>;
 

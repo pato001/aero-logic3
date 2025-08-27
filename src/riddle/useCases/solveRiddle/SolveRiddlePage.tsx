@@ -7,10 +7,11 @@ export const RiddlePage = () => {
         riddle,
         answers,
         handleClick,
-        getAnswerOptionClassName,
+        selected,
         random,
         shouldDisplayRiddle,
         status,
+        correct,
     } = useSolveRiddle();
 
     if (!shouldDisplayRiddle) {
@@ -32,7 +33,16 @@ export const RiddlePage = () => {
                         onClick={() => handleClick(answer.id)}
                         className={classNames(
                             'border py-2 pl-3 pr-2 my-1',
-                            getAnswerOptionClassName(answer.id),
+                            !selected && 'cursor-pointer',
+                            !correct && 'border-blue-500',
+                            selected === answer.id &&
+                                correct &&
+                                correct === answer.id &&
+                                "border-green-700 text-green-900 before:content-['✓']",
+                            selected === answer.id &&
+                                correct &&
+                                correct !== answer.id &&
+                                "border-red-700 text-red-800  before:content-['✗']",
                         )}
                         data-test={`answer-${answer.id}`}
                     >
@@ -46,7 +56,7 @@ export const RiddlePage = () => {
                 </div>
             )}
             {status === 'incorrect' && (
-                <div className="bg-red-300  my-6 p-3">
+                <div className="bg-red-300  my-6 p-3" data-test="incorrect-answer">
                     {'This time your answer is wrong.'}
                 </div>
             )}
